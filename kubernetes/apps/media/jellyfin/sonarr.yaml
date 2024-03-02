@@ -20,10 +20,15 @@ spec:
         volumeMounts:
         - mountPath: "/config"
           name: sonarr-config
+        - name: media
+          mountPath: /media
       volumes:
       - name: sonarr-config
         persistentVolumeClaim:
           claimName: sonarr-config-pvc
+      - name: media
+        persistentVolumeClaim:
+          claimName: media-pvc
 ---
 apiVersion: v1
 kind: Service
