@@ -17,6 +17,13 @@ spec:
         image: linuxserver/prowlarr:version-1.13.3.4273
         ports:
         - containerPort: 9696
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Europe/London"
         volumeMounts:
         - mountPath: "/config"
           name: prowlarr-config

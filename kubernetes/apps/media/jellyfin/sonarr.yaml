@@ -17,6 +17,13 @@ spec:
         image: linuxserver/sonarr:version-4.0.2.1183
         ports:
         - containerPort: 8989
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Europe/London"
         volumeMounts:
         - mountPath: "/config"
           name: sonarr-config

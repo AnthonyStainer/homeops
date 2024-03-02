@@ -17,6 +17,13 @@ spec:
         image: linuxserver/radarr:version-5.3.6.8612
         ports:
         - containerPort: 7878
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Europe/London"
         volumeMounts:
         - mountPath: "/config"
           name: radarr-config
