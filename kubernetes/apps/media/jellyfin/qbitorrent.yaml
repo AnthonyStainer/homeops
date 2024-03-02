@@ -41,3 +41,22 @@ spec:
       - name: config
         persistentVolumeClaim:
           claimName: qbittorrent-config-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: webui
+  - port: 6881
+    targetPort: 6881
+    protocol: UDP
+    name: bt
+  selector:
+    app: qbittorrent
