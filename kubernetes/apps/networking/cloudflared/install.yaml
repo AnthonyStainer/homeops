@@ -97,8 +97,8 @@ data:
     - hostname: hello.stainer.family
       service: hello_world
     - hostname: argocd.stainer.family
-      #service: http://argocd-server:80
-      #service: http://web-service:80
       service: http://argocd-server.argocd.svc.cluster.local:80
+    - hostname: longhorn.stainer.family
+      service: http://longhorn-frontend.longhorn-system.svc.cluster.local:80
     # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
     - service: http_status:404
