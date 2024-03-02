@@ -77,3 +77,6 @@ anthony@spirit:~$ kubectl create secret generic tunnel-credentials \
 secret/tunnel-credentials created
 anthony@spirit:~$
 
+
+
+T

@@ -1,0 +1,14 @@
+project: default
+source:
+  repoURL: 'git@github.com:AnthonyStainer/homeops.git'
+  path: kubernetes/apps/networking/cloudflared
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: cloudflared
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true
