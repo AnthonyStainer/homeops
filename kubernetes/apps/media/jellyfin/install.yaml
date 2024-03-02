@@ -20,17 +20,17 @@ spec:
         volumeMounts:
         - name: jellyfin-config
           mountPath: /config
-        # - name: jellyfin-cache
-        #   mountPath: /cache
+        - name: jellyfin-cache
+          mountPath: /cache
         # - name: media
         #   mountPath: /media
       volumes:
       - name: jellyfin-config
         persistentVolumeClaim:
-          claimName: jellyfin-config-pvc
-      # - name: jellyfin-cache
-      #   persistentVolumeClaim:
-      #     claimName: jellyfin-cache-pvc
+          claimName: jellyfin-config
+      - name: jellyfin-cache
+        persistentVolumeClaim:
+          claimName: jellyfin-cache-pvc
       # - name: media
       #   persistentVolumeClaim:
       #     claimName: media-pvc
