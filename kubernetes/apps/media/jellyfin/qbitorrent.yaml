@@ -35,12 +35,15 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-        # - name: downloads
-        #   mountPath: /downloads
+        - name: media
+          mountPath: /downloads
       volumes:
       - name: config
         persistentVolumeClaim:
           claimName: qbittorrent-config-pvc
+      - name: media
+        persistentVolumeClaim:
+          claimName: media-pvc
 
 ---
 apiVersion: v1
