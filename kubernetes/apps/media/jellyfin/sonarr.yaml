@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: linuxserver/sonarr:version-4.0.2.1183
+        ports:
+        - containerPort: 8989
+        volumeMounts:
+        - mountPath: "/config"
+          name: sonarr-config
+      volumes:
+      - name: sonarr-config
+        persistentVolumeClaim:
+          claimName: sonarr-config-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8989
+    protocol: TCP
+  selector:
+    app: sonarr

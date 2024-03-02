@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
+      - name: prowlarr
+        image: linuxserver/prowlarr:version-1.13.3.4273
+        ports:
+        - containerPort: 9696
+        volumeMounts:
+        - mountPath: "/config"
+          name: prowlarr-config
+      volumes:
+      - name: prowlarr-config
+        persistentVolumeClaim:
+          claimName: prowlarr-config-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 9696
+    protocol: TCP
+  selector:
+    app: prowlarr
