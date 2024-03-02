@@ -15,6 +15,11 @@ spec:
       containers:
       - name: qbittorrent
         image: linuxserver/qbittorrent:4.6.3-r0-ls315
+        resources:
+          requests:
+            cpu: "0.1"
+          limits:
+            cpu: "1"
         ports:
         - containerPort: 8080
           name: webui
