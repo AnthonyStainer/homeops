@@ -1,14 +1,23 @@
-project: default
-source:
-  repoURL: 'git@github.com:AnthonyStainer/homeops.git'
-  path: kubernetes/apps/networking/cloudflared
-  targetRevision: HEAD
-destination:
-  server: 'https://kubernetes.default.svc'
-  namespace: cloudflared
-syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloudflared
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: ''
+    namespace: cloudflared
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: kubernetes/apps/networking/cloudflared
+    repoURL: 'git@github.com:AnthonyStainer/homeops.git'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
