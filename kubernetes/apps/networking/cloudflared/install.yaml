@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared
-  replicas: 1 # You could also consider elastic scaling for this deployment
+  replicas: 2 # You could also consider elastic scaling for this deployment
   template:
     metadata:
       labels:
@@ -21,6 +21,7 @@ spec:
         # Points cloudflared to the config file, which configures what
         # cloudflared will actually do. This file is created by a ConfigMap
         # below.
+        - --no-autoupdate
         - --config
         - /etc/cloudflared/config/config.yaml
         - run
