@@ -33,12 +33,12 @@ spec:
         - name: WEBUI_PORT
           value: "8080"
         volumeMounts:
-        - name: config
+        - name: qbittorrent-config
           mountPath: /config
         - name: media
           mountPath: /downloads
       volumes:
-      - name: config
+      - name: qbittorrent-config
         persistentVolumeClaim:
           claimName: qbittorrent-config-pvc
       - name: media

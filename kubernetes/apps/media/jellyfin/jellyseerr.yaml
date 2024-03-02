@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyseerr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyseerr
+  template:
+    metadata:
+      labels:
+        app: jellyseerr
+    spec:
+      containers:
+      - name: jellyseerr
+        image: fallenbagel/jellyseerr:1.7.0
+        ports:
+        - containerPort: 5055
+        volumeMounts:
+        - mountPath: "/app/config"
+          name: jellyseerr-config
+      volumes:
+      - name: jellyseerr-config
+        persistentVolumeClaim:
+          claimName: jellyseerr-config-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyseerr
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 5055
+    protocol: TCP
+  selector:
+    app: jellyseerr
